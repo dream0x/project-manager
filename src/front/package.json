@@ -11,6 +11,7 @@
 	},
 	"dependencies": {
 		"@biomejs/biome": "^2.5.14",
+		"@hookform/resolvers": "^5.9.1",
 		"@react-native-async-storage/async-storage": "2.2.0",
 		"@tamagui/animations-reanimated": "^2.7.7",
 		"@tamagui/config": "^2.7.7",
@@ -20,11 +21,13 @@
 		"expo-router": "~57.0.2",
 		"react": "19.2.3",
 		"react-dom": "19.2.3",
+		"react-hook-form": "^7.88.0",
 		"react-native": "0.86.0",
 		"react-native-reanimated": "4.5.1",
 		"react-native-svg": "15.15.4",
 		"react-native-web": "^0.21.0",
 		"tamagui": "^2.7.7",
+		"zod": "^4.6.5",
 		"zustand": "^5.0.15"
 	},
 	"private": true,

@@ -1,6 +1,6 @@
 import { View } from "tamagui";
 import { useTodoStore } from "@/states/todo";
-import AddTodo from "./AddTodo";
+import CreateTodo from "./CreateTodo";
 import TodoItem from "./TodoItem";
 
 export default function TodoList() {
@@ -8,7 +8,7 @@ export default function TodoList() {
 	return (
 		<View>
 			{/* Todo追加欄 */}
-			<AddTodo />
+			<CreateTodo />
 
 			{/* Todo一覧 */}
 			{todos.map((todo) => (

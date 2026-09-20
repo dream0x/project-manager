@@ -1,9 +1,13 @@
 import { Plus, X } from "@tamagui/lucide-icons-2";
-import { Button, Dialog, Form, Text, Unspaced, XStack } from "tamagui";
+import { useState } from "react";
+import { Button, Dialog, Text, Unspaced, XStack } from "tamagui";
+import CreateTodoForm from "./CreateTodoForm";
 
-export default function AddTodo() {
+export default function CreateTodo() {
+	const [open, setOpen] = useState(false);
+
 	return (
-		<Dialog modal>
+		<Dialog modal open={open} onOpenChange={setOpen}>
 			{/* 開くボタン */}
 			<Dialog.Trigger asChild>
 				<Button unstyled cursor="pointer">
@@ -23,29 +27,23 @@ export default function AddTodo() {
 						transition="250ms"
 						enterStyle={{ opacity: 0 }}
 					>
-						<Dialog.Title>タイトル</Dialog.Title>
-						<Dialog.Description>説明</Dialog.Description>
-
-						{/* フォーム */}
-						<Form>
-							<Form.Trigger asChild>
-								<Button alignSelf="flex-end">追加</Button>
-							</Form.Trigger>
-						</Form>
+						<Dialog.Title></Dialog.Title>
 
 						{/* 閉じるボタン */}
 						<Unspaced>
 							<Dialog.Close asChild>
 								<Button
 									cursor="pointer"
-									position="absolute"
-									right="$3"
+									alignSelf="flex-end"
 									size="$2"
 									circular
 									icon={X}
 								/>
 							</Dialog.Close>
 						</Unspaced>
+
+						{/* フォーム */}
+						<CreateTodoForm onSuccess={() => setOpen(false)} />
 					</Dialog.Content>
 				</Dialog.FocusScope>
 			</Dialog.Portal>

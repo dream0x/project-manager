@@ -12,7 +12,7 @@ npx create-expo-app -e with-router .
 
 echo "Installing dependencies"
 npx expo install @biomejs/biome \
-  axios zustand \
+  axios zustand react-hook-form zod @hookform/resolvers\
   tamagui @tamagui/config react-native-svg @tamagui/lucide-icons-2 react-native-reanimated @tamagui/animations-reanimated \
   @react-native-async-storage/async-storage
 
