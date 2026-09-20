@@ -1,0 +1,27 @@
+{
+  "name": "front",
+  "version": "1.0.0",
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "npx expo start --lan -p 3000",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "deploy": "npx expo export -p web && npx eas-cli@latest deploy"
+  },
+  "dependencies": {
+    "axios": "^1.20.0",
+    "expo": "^57.0.1",
+    "expo-router": "~57.0.2",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-native": "0.86.0",
+    "react-native-web": "^0.21.0",
+    "tamagui": "^2.7.7",
+    "zustand": "^5.0.15"
+  },
+  "private": true,
+  "devDependencies": {
+    "typescript": "~6.0.3"
+  }
+}
