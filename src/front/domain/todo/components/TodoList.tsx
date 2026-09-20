@@ -1,5 +1,5 @@
 import { View } from "tamagui";
-import { useTodoStore } from "@/states/todo";
+import { useTodoStore } from "@/domain/todo/state";
 import CreateTodo from "./CreateTodo";
 import TodoItem from "./TodoItem";
 

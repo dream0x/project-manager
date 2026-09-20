@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { Button, Input, Label, Text, YStack } from "tamagui";
 import { z } from "zod";
-import { useTodoStore } from "@/states/todo";
+import { useTodoStore } from "@/domain/todo/state";
 
 const todoSchema = z.object({
 	title: z

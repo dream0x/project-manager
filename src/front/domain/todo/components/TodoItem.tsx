@@ -1,5 +1,5 @@
 import { Text, View } from "tamagui";
-import type { Todo } from "@/types/todo";
+import type { Todo } from "@/domain/todo/type";
 
 export default function TodoItem({ todo }: { todo: Todo }) {
 	return (

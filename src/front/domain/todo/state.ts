@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { Todo } from "../types/todo";
+import type { Todo } from "./type";
 
 export const useTodoStore = create<{
 	todos: Todo[];
