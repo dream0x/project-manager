@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import TodoList from "@/components/todos/TodoList";
+import TodoList from "@/domain/todo/components/TodoList";
 
 export default function Index() {
 	return (
