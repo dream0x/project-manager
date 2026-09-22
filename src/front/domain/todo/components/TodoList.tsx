@@ -9,24 +9,26 @@ export default function TodoList() {
 	const completedTodos = todos.filter((todo) => todo.completed);
 
 	return (
-		<YStack padding="$6" gap="$3">
-			{/* Todo追加欄 */}
-			<CreateTodo />
+		<YStack gap="$3" alignItems="center">
+			<YStack width="100%" $xl={{ width: "50%" }} padding="$6">
+				{/* Todo追加欄 */}
+				<CreateTodo />
 
-			{/* Todo一覧 */}
-			<YStack gap="$2">
-				{/* 未完了Todo一覧 */}
-				<Text>未完了タスク</Text>
-				{incompleteTodos.map((todo) => (
-					<TodoItem key={todo.id} todo={todo} />
-				))}
+				{/* Todo一覧 */}
+				<YStack gap="$2">
+					{/* 未完了Todo一覧 */}
+					<Text marginTop="$3">未完了タスク</Text>
+					{incompleteTodos.map((todo) => (
+						<TodoItem key={todo.id} todo={todo} />
+					))}
 
-				{/* 完了済みTodo一覧 */}
-				<Separator borderColor="lightgray" marginVertical="$3" />
-				<Text>完了済みタスク</Text>
-				{completedTodos.map((todo) => (
-					<TodoItem key={todo.id} todo={todo} />
-				))}
+					{/* 完了済みTodo一覧 */}
+					<Separator borderColor="lightgray" marginTop="$3" />
+					<Text marginTop="$3">完了済みタスク</Text>
+					{completedTodos.map((todo) => (
+						<TodoItem key={todo.id} todo={todo} />
+					))}
+				</YStack>
 			</YStack>
 		</YStack>
 	);

@@ -1,6 +1,6 @@
-import { X } from "@tamagui/lucide-icons-2";
 import { type ReactElement, useState } from "react";
-import { Button, Dialog, Unspaced } from "tamagui";
+import { Dialog, Unspaced } from "tamagui";
+import { useShowDialogOverlay } from "./state/dialogOverlay";
 
 /**
  * 共通ダイアログ
@@ -8,8 +8,10 @@ import { Button, Dialog, Unspaced } from "tamagui";
 export default function CommonDialog(props: {
 	trigger: ReactElement;
 	content: (onClose: () => void) => ReactElement;
+	menuItems?: ReactElement;
 }) {
 	const [open, setOpen] = useState(false);
+	const showOverlay = useShowDialogOverlay(open);
 
 	return (
 		<Dialog modal open={open} onOpenChange={setOpen}>
@@ -18,28 +20,19 @@ export default function CommonDialog(props: {
 
 			{/* コンテンツ */}
 			<Dialog.Portal>
-				<Dialog.Overlay background="$background" />
+				{showOverlay && <Dialog.Overlay opacity={0.5} />}
 				<Dialog.FocusScope focusOnIdle>
 					<Dialog.Content
-						width="50%"
+						width="100%"
+						$xl={{ width: "50%" }}
 						transition="250ms"
 						enterStyle={{ opacity: 0 }}
 					>
 						<Dialog.Title></Dialog.Title>
 						<Dialog.Description></Dialog.Description>
 
-						{/* 閉じるボタン */}
-						<Unspaced>
-							<Dialog.Close asChild>
-								<Button
-									cursor="pointer"
-									alignSelf="flex-end"
-									size="$2"
-									circular
-									icon={X}
-								/>
-							</Dialog.Close>
-						</Unspaced>
+						{/* メニューアイテム */}
+						<Unspaced>{props.menuItems && props.menuItems}</Unspaced>
 
 						{/* コンテンツ */}
 						{props.content(() => setOpen(false))}

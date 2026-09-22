@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button, Text, XStack } from "tamagui";
 import CommonDialog from "@/domain/common/CommonDialog";
 import CommonForm from "@/domain/common/CommonForm";
+import DeleteButton from "@/domain/common/DeleteButton";
 import {
 	fields,
 	type TodoUpsertFormValues,
@@ -65,6 +66,7 @@ export default function TodoItem(props: { todo: Todo }) {
 					submitLabel="更新"
 				/>
 			)}
+			menuItems={<DeleteButton todo={props.todo} />}
 		/>
 	);
 }
