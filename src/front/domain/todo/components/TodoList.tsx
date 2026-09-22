@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Separator, Text, YStack } from "tamagui";
 import { useTodoStore } from "@/domain/todo/state";
 import CreateTodo from "./CreateTodo";
@@ -7,6 +8,10 @@ export default function TodoList() {
 	const todos = useTodoStore((state) => state.todos);
 	const incompleteTodos = todos.filter((todo) => !todo.completed);
 	const completedTodos = todos.filter((todo) => todo.completed);
+
+	useEffect(() => {
+		useTodoStore.getState().getAll();
+	}, []);
 
 	return (
 		<YStack gap="$3" alignItems="center">

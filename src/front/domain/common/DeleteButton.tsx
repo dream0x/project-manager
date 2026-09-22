@@ -8,7 +8,7 @@ import { useShowDialogOverlay } from "./state/dialogOverlay";
 export default function DeleteButton(props: { todo: Todo }) {
 	const [open, setOpen] = useState(false);
 	const showOverlay = useShowDialogOverlay(open);
-	const deleteTodo = useTodoStore((state) => state.deleteTodo);
+	const deleteTodo = useTodoStore((state) => state.delete);
 
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
@@ -25,8 +25,8 @@ export default function DeleteButton(props: { todo: Todo }) {
 					borderRadius="$2"
 					borderWidth={1}
 					borderColor="$red6"
-					size="$4"
-					iconSize="$7"
+					size="$3"
+					iconSize="$6"
 					icon={<Trash color="$red10" />}
 				/>
 			</AlertDialog.Trigger>

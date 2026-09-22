@@ -16,7 +16,7 @@ const defaultValues: TodoUpsertFormValues = {
 };
 
 export default function CreateTodo() {
-	const createTodo = useTodoStore((state) => state.createTodo);
+	const createTodo = useTodoStore((state) => state.create);
 
 	return (
 		<CommonDialog

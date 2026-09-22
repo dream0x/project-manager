@@ -1,63 +1,67 @@
 import { create } from "zustand";
+import { api } from "../common/lib/axios";
 import type { Todo } from "./type";
 
 export const useTodoStore = create<{
 	todos: Todo[];
-	createTodo: (title: string, description: string) => void;
-	updateTodo: (id: number, title: string, description: string) => void;
-	toggleTodo: (id: number) => void;
-	deleteTodo: (id: number) => void;
+	getAll: () => Promise<void>;
+	create: (title: string, description: string) => void;
+	update: (
+		id: number,
+		title: string,
+		description: string,
+		completed: boolean,
+	) => void;
+	delete: (id: number) => void;
 }>((set) => ({
-	todos: [
-		{
-			id: 1,
-			title: "掃除",
-			description: "部屋を掃除する",
-			completed: false,
-		},
-		{
-			id: 2,
-			title: "運動",
-			description: "毎日運動する",
-			completed: false,
-		},
-		{
-			id: 3,
-			title: "プログラミング",
-			description: "毎日プログラミングする",
-			completed: true,
-		},
-	],
+	todos: [],
 
-	createTodo: async (title, description) =>
+	create: async (title, description) => {
+		const response = await api.post("/todos", { title, description });
+		const createdTodo = response.data;
 		set((state) => ({
 			todos: [
 				...state.todos,
 				{
-					id: Date.now(),
-					title,
-					description,
-					completed: false,
+					id: createdTodo.id,
+					title: createdTodo.title,
+					description: createdTodo.description,
+					completed: createdTodo.completed,
 				},
 			],
-		})),
+		}));
+	},
 
-	updateTodo: async (id, title, description) =>
+	getAll: async () => {
+		const response: { data: Todo[] } = await api.get("/todos");
+		set({ todos: response.data });
+	},
+
+	update: async (id, title, description, completed) => {
+		const response = await api.patch(`todos/${id}`, {
+			title,
+			description,
+			completed,
+		});
+		const updatedTodo = response.data;
 		set((state) => ({
 			todos: state.todos.map((todo) =>
-				todo.id === id ? { ...todo, title, description } : todo,
+				todo.id === id
+					? {
+							...todo,
+							title: updatedTodo.title,
+							description: updatedTodo.description,
+							completed: updatedTodo.completed,
+						}
+					: todo,
 			),
-		})),
+		}));
+	},
 
-	deleteTodo: async (id) =>
+	delete: async (id) => {
+		await api.delete(`/todos/${id}`);
 		set((state) => ({
 			todos: state.todos.filter((todo) => todo.id !== id),
-		})),
-
-	toggleTodo: async (id) =>
-		set((state) => ({
-			todos: state.todos.map((todo) =>
-				todo.id === id ? { ...todo, completed: !todo.completed } : todo,
-			),
-		})),
+		}));
+	},
 }));

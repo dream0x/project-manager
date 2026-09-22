@@ -13,8 +13,8 @@ import { useTodoStore } from "../state";
 import type { Todo } from "../type";
 
 export default function TodoItem(props: { todo: Todo }) {
-	const updateTodo = useTodoStore((state) => state.updateTodo);
-	const toggleTodo = useTodoStore((state) => state.toggleTodo);
+	const updateTodo = useTodoStore((state) => state.update);
+	const toggleTodo = useTodoStore((state) => state.update);
 	const [isHoveringToggle, setIsHoveringToggle] = useState(false);
 
 	// デフォルト値
@@ -42,7 +42,14 @@ export default function TodoItem(props: { todo: Todo }) {
 							icon={isHoveringToggle ? CircleCheck : Circle}
 							onMouseEnter={() => setIsHoveringToggle(true)}
 							onMouseLeave={() => setIsHoveringToggle(false)}
-							onPress={() => toggleTodo(props.todo.id)}
+							onPress={() =>
+								toggleTodo(
+									props.todo.id,
+									props.todo.title,
+									props.todo.description,
+									!props.todo.completed,
+								)
+							}
 						/>
 						<Text
 							textDecorationLine={
@@ -60,7 +67,12 @@ export default function TodoItem(props: { todo: Todo }) {
 					defaultValues={defaultValues}
 					formFields={fields}
 					onSubmit={async ({ title, description }: TodoUpsertFormValues) => {
-						await updateTodo(props.todo.id, title, description);
+						await updateTodo(
+							props.todo.id,
+							title,
+							description,
+							props.todo.completed,
+						);
 						setClose();
 					}}
 					submitLabel="更新"
