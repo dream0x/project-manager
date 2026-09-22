@@ -4,6 +4,7 @@ import type { Todo } from "./type";
 export const useTodoStore = create<{
 	todos: Todo[];
 	createTodo: (title: string, description: string) => void;
+	updateTodo: (id: number, title: string, description: string) => void;
 	toggleTodo: (id: number) => void;
 	deleteTodo: (id: number) => void;
 }>((set) => ({
@@ -41,14 +42,22 @@ export const useTodoStore = create<{
 			],
 		})),
 
+	updateTodo: async (id, title, description) =>
+		set((state) => ({
+			todos: state.todos.map((todo) =>
+				todo.id === id ? { ...todo, title, description } : todo,
+			),
+		})),
+
+	deleteTodo: async (id) =>
+		set((state) => ({
+			todos: state.todos.filter((todo) => todo.id !== id),
+		})),
+
 	toggleTodo: async (id) =>
 		set((state) => ({
 			todos: state.todos.map((todo) =>
 				todo.id === id ? { ...todo, completed: !todo.completed } : todo,
 			),
-		})),
-	deleteTodo: async (id) =>
-		set((state) => ({
-			todos: state.todos.filter((todo) => todo.id !== id),
 		})),
 }));

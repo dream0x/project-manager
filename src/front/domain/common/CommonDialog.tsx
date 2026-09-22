@@ -2,6 +2,9 @@ import { X } from "@tamagui/lucide-icons-2";
 import { type ReactElement, useState } from "react";
 import { Button, Dialog, Unspaced } from "tamagui";
 
+/**
+ * 共通ダイアログ
+ */
 export default function CommonDialog(props: {
 	trigger: ReactElement;
 	content: (onClose: () => void) => ReactElement;
@@ -23,6 +26,7 @@ export default function CommonDialog(props: {
 						enterStyle={{ opacity: 0 }}
 					>
 						<Dialog.Title></Dialog.Title>
+						<Dialog.Description></Dialog.Description>
 
 						{/* 閉じるボタン */}
 						<Unspaced>

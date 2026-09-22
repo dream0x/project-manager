@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+## web
+
+# docker compose restart web
+
 ## front
 
 docker compose exec front bash -c '
