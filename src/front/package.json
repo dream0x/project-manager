@@ -4,6 +4,7 @@
 	"main": "expo-router/entry",
 	"scripts": {
 		"start": "npx expo start --lan -p 3000",
+		"openapi": "npx openapi-typescript http://back:8000/api/v3/api-docs -o domain/common/api-types.ts",
 		"android": "expo start --android",
 		"ios": "expo start --ios",
 		"web": "expo start --web",
@@ -32,6 +33,7 @@
 	},
 	"private": true,
 	"devDependencies": {
-		"typescript": "~6.0.3"
+		"openapi-typescript": "^7.13.0",
+		"typescript": "~5.9.3"
 	}
 }

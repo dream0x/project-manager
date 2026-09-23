@@ -5,7 +5,7 @@ import type { Todo } from "./type";
 export const useTodoStore = create<{
 	todos: Todo[];
 	getAll: () => Promise<void>;
-	create: (title: string, description: string) => void;
+	create: (title: string, description?: string) => void;
 	update: (
 		id: number,
 		title: string,

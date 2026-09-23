@@ -1,4 +1,4 @@
-package com.app.domain.todo;
+package com.app.domain.todo.dto;
 
 import lombok.Data;
 import jakarta.validation.constraints.NotBlank;
@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotBlank;
 public class UpdateTodoRequest {
   @NotBlank
   private String title;
+  @NotBlank
   private String description;
+  @NotBlank
   private boolean completed;
 }

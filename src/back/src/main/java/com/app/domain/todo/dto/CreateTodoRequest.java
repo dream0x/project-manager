@@ -1,4 +1,4 @@
-package com.app.domain.todo;
+package com.app.domain.todo.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

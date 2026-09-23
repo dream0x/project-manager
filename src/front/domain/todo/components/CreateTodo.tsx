@@ -3,20 +3,20 @@ import { Button, Text, XStack } from "tamagui";
 import CommonDialog from "@/domain/common/CommonDialog";
 import CommonForm from "@/domain/common/CommonForm";
 import {
-	fields,
-	type TodoUpsertFormValues,
-	todoUpsertFormSchema,
-} from "../form";
+	createTodoFields,
+	createTodoSchema,
+	type createTodoValues,
+} from "../form/create-todo-form";
 import { useTodoStore } from "../state";
-
-// デフォルト値
-const defaultValues: TodoUpsertFormValues = {
-	title: "",
-	description: "",
-};
 
 export default function CreateTodo() {
 	const createTodo = useTodoStore((state) => state.create);
+
+	// フォームのデフォルト値
+	const createTodoDefaultValues: createTodoValues = {
+		title: "",
+		description: "",
+	};
 
 	return (
 		<CommonDialog
@@ -37,10 +37,10 @@ export default function CreateTodo() {
 			}
 			content={(setClose) => (
 				<CommonForm
-					schema={todoUpsertFormSchema}
-					defaultValues={defaultValues}
-					formFields={fields}
-					onSubmit={async ({ title, description }: TodoUpsertFormValues) => {
+					schema={createTodoSchema}
+					defaultValues={createTodoDefaultValues}
+					formFields={createTodoFields}
+					onSubmit={async ({ title, description }: createTodoValues) => {
 						await createTodo(title, description);
 						setClose();
 					}}

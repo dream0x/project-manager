@@ -1,6 +1,3 @@
-export type Todo = {
-	id: number;
-	title: string;
-	description: string;
-	completed: boolean;
-};
+import type { components } from "@/domain/common/api-types";
+
+export type Todo = components["schemas"]["TodoResponse"];

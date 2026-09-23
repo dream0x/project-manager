@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.domain.todo.dto.CreateTodoRequest;
+import com.app.domain.todo.dto.TodoResponse;
+import com.app.domain.todo.dto.UpdateTodoRequest;
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
@@ -22,17 +26,17 @@ public class TodoController {
   private final TodoService todoService;
 
   @PostMapping
-  public TodoEntity create(@RequestBody @Valid CreateTodoRequest todo) {
+  public TodoResponse create(@RequestBody @Valid CreateTodoRequest todo) {
     return todoService.create(todo);
   }
 
   @GetMapping
-  public List<TodoEntity> getAll() {
+  public List<TodoResponse> getAll() {
     return todoService.getAll();
   }
 
   @PatchMapping("{id}")
-  public TodoEntity update(@PathVariable("id") Long id, @RequestBody @Valid UpdateTodoRequest request) {
+  public TodoResponse update(@PathVariable("id") Long id, @RequestBody @Valid UpdateTodoRequest request) {
     return todoService.update(id, request);
   }
 

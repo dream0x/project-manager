@@ -1,4 +1,4 @@
-dev.kotadev.com {
+dev.kotadev.com, localhost:80, web:80 {
 	encode
 	
 	handle /api/* {

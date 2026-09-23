@@ -5,10 +5,10 @@ import CommonDialog from "@/domain/common/CommonDialog";
 import CommonForm from "@/domain/common/CommonForm";
 import DeleteButton from "@/domain/common/DeleteButton";
 import {
-	fields,
-	type TodoUpsertFormValues,
-	todoUpsertFormSchema,
-} from "../form";
+	updateTodoFields,
+	updateTodoSchema,
+	type updateTodoValues,
+} from "../form/update-todo-form";
 import { useTodoStore } from "../state";
 import type { Todo } from "../type";
 
@@ -17,10 +17,11 @@ export default function TodoItem(props: { todo: Todo }) {
 	const toggleTodo = useTodoStore((state) => state.update);
 	const [isHoveringToggle, setIsHoveringToggle] = useState(false);
 
-	// デフォルト値
-	const defaultValues: TodoUpsertFormValues = {
+	// フォームのデフォルト値
+	const updateTodoDefaultValues: updateTodoValues = {
 		title: props.todo.title,
 		description: props.todo.description,
+		completed: props.todo.completed,
 	};
 
 	return (
@@ -63,10 +64,10 @@ export default function TodoItem(props: { todo: Todo }) {
 			}
 			content={(setClose) => (
 				<CommonForm
-					schema={todoUpsertFormSchema}
-					defaultValues={defaultValues}
-					formFields={fields}
-					onSubmit={async ({ title, description }: TodoUpsertFormValues) => {
+					schema={updateTodoSchema}
+					defaultValues={updateTodoDefaultValues}
+					formFields={updateTodoFields}
+					onSubmit={async ({ title, description }: updateTodoValues) => {
 						await updateTodo(
 							props.todo.id,
 							title,

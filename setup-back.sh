@@ -12,10 +12,5 @@ curl -G https://start.spring.io/starter.tgz \
   -d javaVersion=25 \
   -d groupId=com \
   -d artifactId=app \
-  -d dependencies=devtools,lombok,web,validation,data-jpa,postgresql \
+  -d dependencies=devtools,lombok,web,validation,data-jpa,postgresql,springdoc-openapi \
   | tar -xzvf -
-
-
-# docker compose exec back bash -c '
-
-# '

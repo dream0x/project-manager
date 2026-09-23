@@ -24,4 +24,10 @@ public class TodoEntity {
   private String title;
   private String description;
   private boolean completed;
+
+  public void update(String title, String description, boolean completed) {
+    this.title = title;
+    this.description = description;
+    this.completed = completed;
+  }
 }
