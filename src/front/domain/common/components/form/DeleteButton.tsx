@@ -1,14 +1,11 @@
 import { Trash } from "@tamagui/lucide-icons-2";
 import { useState } from "react";
 import { AlertDialog, Button, XStack, YStack } from "tamagui";
-import { useTodoStore } from "../../todo/state";
-import type { Todo } from "../../todo/type";
-import { useShowDialogOverlay } from "../state/dialogOverlay";
+import { useShowDialogOverlay } from "../../state/dialogOverlay";
 
-export default function DeleteButton(props: { todo: Todo }) {
+export default function DeleteButton(props: { onSubmit: () => void }) {
 	const [open, setOpen] = useState(false);
 	const showOverlay = useShowDialogOverlay(open);
-	const deleteTodo = useTodoStore((state) => state.delete);
 
 	return (
 		<AlertDialog open={open} onOpenChange={setOpen}>
@@ -49,12 +46,7 @@ export default function DeleteButton(props: { todo: Todo }) {
 
 						{/* アクションボタン */}
 						<AlertDialog.Action asChild>
-							<Button
-								theme="accent"
-								onPress={() => {
-									deleteTodo(props.todo.id);
-								}}
-							>
+							<Button theme="accent" onPress={props.onSubmit}>
 								削除
 							</Button>
 						</AlertDialog.Action>

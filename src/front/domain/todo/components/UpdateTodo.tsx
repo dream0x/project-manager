@@ -2,10 +2,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Circle, CircleCheck } from "@tamagui/lucide-icons-2";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Button, Text, View, XStack } from "tamagui";
+import { Button, Text, XStack, YStack } from "tamagui";
 import z from "zod";
 import type { components } from "@/domain/common/api-types";
 import CommonDialog from "@/domain/common/components/CommonDialog";
+import DeleteButton from "@/domain/common/components/form/DeleteButton";
 import FormArea from "@/domain/common/components/form/FormArea";
 import FormInput from "@/domain/common/components/form/FormInput";
 import FormTextArea from "@/domain/common/components/form/FormTextArea";
@@ -66,6 +67,11 @@ export default function UpdateTodo(props: { todo: Todo }) {
 		reset();
 	};
 
+	const deleteTodo = useTodoStore((state) => state.delete);
+	const deleteSubmit = () => {
+		deleteTodo(props.todo.id);
+	};
+
 	return (
 		<CommonDialog
 			trigger={
@@ -118,7 +124,8 @@ export default function UpdateTodo(props: { todo: Todo }) {
 					formState={formState}
 					submitLabel="作成"
 				>
-					<View>
+					<YStack>
+						<DeleteButton onSubmit={deleteSubmit} />
 						<FormInput
 							control={control}
 							id="title"
@@ -132,7 +139,7 @@ export default function UpdateTodo(props: { todo: Todo }) {
 							label="詳細"
 							placeholder="詳細"
 						/>
-					</View>
+					</YStack>
 				</FormArea>
 			)}
 		/>
