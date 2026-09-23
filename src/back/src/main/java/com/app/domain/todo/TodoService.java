@@ -9,8 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.domain.todo.dto.CreateTodoRequest;
 import com.app.domain.todo.dto.TodoResponse;
 import com.app.domain.todo.dto.UpdateTodoRequest;
-
-import jakarta.persistence.EntityNotFoundException;
+import com.app.exception.NotFoundException;
 
 @Service
 @Transactional
@@ -18,9 +17,18 @@ import jakarta.persistence.EntityNotFoundException;
 public class TodoService {
   private final TodoRepository todoRepository;
 
+  private final String RESOURCE_NAME = "Todo";
+
   public TodoResponse create(CreateTodoRequest request) {
-    TodoEntity saved = todoRepository.save(new TodoEntity(null, request.getTitle(), request.getDescription(), false));
-    return TodoResponse.from(saved);
+    TodoEntity createTodo = TodoEntity.create(request);
+    TodoEntity createdTodo = todoRepository.save(createTodo);
+    return TodoResponse.from(createdTodo);
+  }
+
+  public TodoResponse get(Long id) {
+    TodoEntity foundTodo = todoRepository.findById(id)
+        .orElseThrow(() -> new NotFoundException(RESOURCE_NAME, id));
+    return TodoResponse.from(foundTodo);
   }
 
   public List<TodoResponse> getAll() {
@@ -28,15 +36,16 @@ public class TodoService {
   }
 
   public TodoResponse update(Long id, UpdateTodoRequest request) {
-    TodoEntity todo = todoRepository.findById(id)
-        .orElseThrow(() -> new EntityNotFoundException("対象のリソースが見つかりません。" + id));
-    todo.update(request.getTitle(), request.getDescription(), request.isCompleted());
-    return TodoResponse.from(todoRepository.save(todo));
+    TodoEntity foundTodo = todoRepository.findById(id)
+        .orElseThrow(() -> new NotFoundException(RESOURCE_NAME, id));
+    foundTodo.update(request);
+    TodoEntity updatedTodo = todoRepository.save(foundTodo);
+    return TodoResponse.from(updatedTodo);
   }
 
   public void delete(Long id) {
     todoRepository.findById(id)
-        .orElseThrow(() -> new EntityNotFoundException("対象のリソースが見つかりません。" + id));
+        .orElseThrow(() -> new NotFoundException(RESOURCE_NAME, id));
     todoRepository.deleteById(id);
   }
 }

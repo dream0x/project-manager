@@ -1,14 +1,15 @@
-import { type ReactElement, useState } from "react";
+import type React from "react";
+import { useState } from "react";
 import { Dialog, Unspaced } from "tamagui";
-import { useShowDialogOverlay } from "./state/dialogOverlay";
+import { useShowDialogOverlay } from "../state/dialogOverlay";
 
 /**
  * 共通ダイアログ
  */
 export default function CommonDialog(props: {
-	trigger: ReactElement;
-	content: (onClose: () => void) => ReactElement;
-	menuItems?: ReactElement;
+	trigger: React.JSX.Element;
+	content: (closeDialog: () => void) => React.JSX.Element;
+	menuItems?: React.JSX.Element;
 }) {
 	const [open, setOpen] = useState(false);
 	const showOverlay = useShowDialogOverlay(open);

@@ -30,6 +30,11 @@ public class TodoController {
     return todoService.create(todo);
   }
 
+  @GetMapping("{id}")
+  public TodoResponse get(@PathVariable("id") Long id) {
+    return todoService.get(id);
+  }
+
   @GetMapping
   public List<TodoResponse> getAll() {
     return todoService.getAll();

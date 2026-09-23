@@ -4,9 +4,13 @@ import com.app.domain.todo.TodoEntity;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
+@Builder
 public class TodoResponse {
   @Schema(requiredMode = RequiredMode.REQUIRED)
   private Long id;
@@ -18,11 +22,11 @@ public class TodoResponse {
   private boolean completed;
 
   public static TodoResponse from(TodoEntity entity) {
-    TodoResponse response = new TodoResponse();
-    response.setId(entity.getId());
-    response.setTitle(entity.getTitle());
-    response.setDescription(entity.getDescription());
-    response.setCompleted(entity.isCompleted());
-    return response;
+    return TodoResponse.builder()
+        .id(entity.getId())
+        .title(entity.getTitle())
+        .description(entity.getDescription())
+        .completed(entity.isCompleted())
+        .build();
   }
 }

@@ -5,18 +5,20 @@ import type { Todo } from "./type";
 export const useTodoStore = create<{
 	todos: Todo[];
 	getAll: () => Promise<void>;
-	create: (title: string, description?: string) => void;
+	create: (values: { title: string; description?: string }) => void;
 	update: (
 		id: number,
-		title: string,
-		description: string,
-		completed: boolean,
+		values: {
+			title: string;
+			description: string;
+			completed: boolean;
+		},
 	) => void;
 	delete: (id: number) => void;
 }>((set) => ({
 	todos: [],
 
-	create: async (title, description) => {
+	create: async ({ title, description }) => {
 		const response = await api.post("/todos", { title, description });
 		const createdTodo = response.data;
 		set((state) => ({
@@ -37,7 +39,7 @@ export const useTodoStore = create<{
 		set({ todos: response.data });
 	},
 
-	update: async (id, title, description, completed) => {
+	update: async (id, { title, description, completed }) => {
 		const response = await api.patch(`todos/${id}`, {
 			title,
 			description,

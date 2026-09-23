@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Separator, Text, YStack } from "tamagui";
 import { useTodoStore } from "@/domain/todo/state";
 import CreateTodo from "./CreateTodo";
-import TodoItem from "./TodoItem";
+import UpdateTodo from "./UpdateTodo";
 
 export default function TodoList() {
 	const todos = useTodoStore((state) => state.todos);
@@ -24,14 +24,14 @@ export default function TodoList() {
 					{/* 未完了Todo一覧 */}
 					<Text marginTop="$3">未完了タスク</Text>
 					{incompleteTodos.map((todo) => (
-						<TodoItem key={todo.id} todo={todo} />
+						<UpdateTodo key={todo.id} todo={todo} />
 					))}
 
 					{/* 完了済みTodo一覧 */}
 					<Separator borderColor="lightgray" marginTop="$3" />
 					<Text marginTop="$3">完了済みタスク</Text>
 					{completedTodos.map((todo) => (
-						<TodoItem key={todo.id} todo={todo} />
+						<UpdateTodo key={todo.id} todo={todo} />
 					))}
 				</YStack>
 			</YStack>

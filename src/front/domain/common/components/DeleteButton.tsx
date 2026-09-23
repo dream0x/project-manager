@@ -1,9 +1,9 @@
 import { Trash } from "@tamagui/lucide-icons-2";
 import { useState } from "react";
 import { AlertDialog, Button, XStack, YStack } from "tamagui";
-import { useTodoStore } from "../todo/state";
-import type { Todo } from "../todo/type";
-import { useShowDialogOverlay } from "./state/dialogOverlay";
+import { useTodoStore } from "../../todo/state";
+import type { Todo } from "../../todo/type";
+import { useShowDialogOverlay } from "../state/dialogOverlay";
 
 export default function DeleteButton(props: { todo: Todo }) {
 	const [open, setOpen] = useState(false);
