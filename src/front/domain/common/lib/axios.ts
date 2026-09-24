@@ -1,5 +1,5 @@
+import { toast } from "@tamagui/toast/v2";
 import axios from "axios";
-
 
 export const api = axios.create({
 	baseURL: "/api",
@@ -21,6 +21,7 @@ api.interceptors.response.use(
 		return response;
 	},
 	(error) => {
+		error.message && toast.error(error.message);
 		return Promise.reject(error);
 	},
 );
