@@ -34,3 +34,6 @@ npx expo start --lan -p 3000
 
 # open-api: curl back:8000/api/v3/api-docs
 ## back
+
+
+# docker-compose

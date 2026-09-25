@@ -122,7 +122,7 @@ export default function UpdateTodo(props: { todo: Todo }) {
 						closeDialog();
 					}}
 					formState={formState}
-					submitLabel="作成"
+					submitLabel="更新"
 				>
 					<YStack>
 						<DeleteButton onSubmit={deleteSubmit} />

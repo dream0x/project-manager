@@ -15,7 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "todos")
+@Table(name = "todo")
 @Data
 @AllArgsConstructor
 @Builder
@@ -40,8 +40,8 @@ public class TodoEntity {
 
   // 更新
   public void update(UpdateTodoRequest request) {
-      this.title = request.getTitle();
-      this.description = request.getDescription();
-      this.completed = request.getCompleted();
+    this.title = request.getTitle();
+    this.description = request.getDescription();
+    this.completed = request.getCompleted();
   }
 }
