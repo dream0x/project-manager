@@ -81,7 +81,7 @@ export default function CreateTodo() {
 					formState={formState}
 					submitLabel="作成"
 				>
-					<YStack>
+					<YStack gap="$4">
 						<FormInput
 							control={control}
 							id="title"

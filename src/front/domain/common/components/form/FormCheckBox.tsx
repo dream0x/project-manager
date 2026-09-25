@@ -1,6 +1,11 @@
 import { Check, Tag } from "@tamagui/lucide-icons-2";
 import { useEffect } from "react";
-import type { Control, FieldValues, Path } from "react-hook-form";
+import {
+	type Control,
+	type FieldValues,
+	type Path,
+	useWatch,
+} from "react-hook-form";
 import { Button, Checkbox, Text, XStack, YStack } from "tamagui";
 import { useLabelStore } from "@/domain/label/state";
 import CommonDialog from "../CommonDialog";
@@ -18,6 +23,15 @@ export default function FormCheckBox<T extends FieldValues>(props: {
 		useLabelStore.getState().getAll();
 	}, []);
 
+	// 選択中のラベルID
+	const selectedIds: number[] =
+		useWatch({ control: props.control, name: props.id }) ?? [];
+
+	// 選択中のラベル名
+	const selectedNames = labels
+		.filter((label) => selectedIds.includes(label.id))
+		.map((label) => label.name);
+
 	return (
 		<CommonDialog
 			trigger={
@@ -31,16 +45,15 @@ export default function FormCheckBox<T extends FieldValues>(props: {
 				>
 					<XStack alignItems="center">
 						<Tag />
-						<Text>ラベル</Text>
+						<Text>
+							{selectedNames.length > 0 ? selectedNames.join("、") : "ラベル"}
+						</Text>
 					</XStack>
 				</Button>
 			}
 			content={() => (
 				<FormField control={props.control} id={props.id} label={props.label}>
 					{({ field }) => {
-						// 選択中のラベルID
-						const selectedIds: number[] = field.value ?? [];
-
 						const toggle = (id: number) => {
 							field.onChange(
 								selectedIds.includes(id)

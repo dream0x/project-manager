@@ -18,6 +18,9 @@ export default function FormTextArea<T extends FieldValues>(props: {
 			{({ field }) => (
 				<TextArea
 					size="$4"
+					style={{
+						resize: 'none',
+					}}
 					id={props.id}
 					placeholder={props.placeholder}
 					value={field.value}

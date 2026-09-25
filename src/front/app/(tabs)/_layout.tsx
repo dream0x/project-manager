@@ -9,9 +9,9 @@ const tabs: { name: string; href: string; label: string }[] = [
 		label: "Todo",
 	},
 	{
-		name: "filters",
-		href: "/filters",
-		label: "フィルター",
+		name: "projects",
+		href: "/projects",
+		label: "プロジェクト",
 	},
 	{
 		name: "labels",
