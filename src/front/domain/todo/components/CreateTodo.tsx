@@ -1,11 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus } from "@tamagui/lucide-icons-2";
 import { useForm } from "react-hook-form";
-import { Button, Text, View, XStack } from "tamagui";
+import { Button, Text, XStack, YStack } from "tamagui";
 import z from "zod";
 import type { components } from "@/domain/common/api-types";
 import CommonDialog from "@/domain/common/components/CommonDialog";
 import FormArea from "@/domain/common/components/form/FormArea";
+import DialogCheckbox from "@/domain/common/components/form/FormCheckBox";
 import FormInput from "@/domain/common/components/form/FormInput";
 import FormTextArea from "@/domain/common/components/form/FormTextArea";
 import { useTodoStore } from "../state";
@@ -25,6 +26,7 @@ export const createTodoSchema = z.object({
 		.trim()
 		.max(500, "詳細は500文字以内で入力してください")
 		.optional(),
+	labelIds: z.array(z.number()).optional(),
 }) satisfies z.ZodType<CreateTodoRequest>;
 
 // 作成フォーム
@@ -36,6 +38,7 @@ export default function CreateTodo() {
 	const createTodoDefaultValues: CreateTodoRequest = {
 		title: "",
 		description: "",
+		labelIds: [],
 	};
 
 	// フォームの初期化
@@ -78,7 +81,7 @@ export default function CreateTodo() {
 					formState={formState}
 					submitLabel="作成"
 				>
-					<View>
+					<YStack>
 						<FormInput
 							control={control}
 							id="title"
@@ -92,7 +95,9 @@ export default function CreateTodo() {
 							label="詳細"
 							placeholder="詳細"
 						/>
-					</View>
+
+						<DialogCheckbox control={control} id="labelIds" label="ラベル" />
+					</YStack>
 				</FormArea>
 			)}
 		/>

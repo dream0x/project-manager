@@ -8,6 +8,7 @@ import type { components } from "@/domain/common/api-types";
 import CommonDialog from "@/domain/common/components/CommonDialog";
 import DeleteButton from "@/domain/common/components/form/DeleteButton";
 import FormArea from "@/domain/common/components/form/FormArea";
+import FormCheckBox from "@/domain/common/components/form/FormCheckBox";
 import FormInput from "@/domain/common/components/form/FormInput";
 import FormTextArea from "@/domain/common/components/form/FormTextArea";
 import { useTodoStore } from "../state";
@@ -28,6 +29,7 @@ export const updateTodoSchema = z.object({
 		.trim()
 		.max(500, "詳細は500文字以内で入力してください"),
 	completed: z.boolean(),
+	labelIds: z.array(z.number()).optional(),
 }) satisfies z.ZodType<UpdateTodoRequest>;
 
 // 作成フォーム
@@ -43,6 +45,7 @@ export default function UpdateTodo(props: { todo: Todo }) {
 		title: props.todo.title,
 		description: props.todo.description,
 		completed: props.todo.completed,
+		labelIds: props.todo.labels.map((label) => label.id),
 	};
 
 	// フォームの初期化
@@ -58,8 +61,15 @@ export default function UpdateTodo(props: { todo: Todo }) {
 			title: props.todo.title,
 			description: props.todo.description,
 			completed: props.todo.completed,
+			labelIds: props.todo.labels.map((label) => label.id),
 		});
-	}, [reset, props.todo.title, props.todo.description, props.todo.completed]);
+	}, [
+		reset,
+		props.todo.title,
+		props.todo.description,
+		props.todo.completed,
+		props.todo.labels,
+	]);
 
 	// フォーム送信時処理
 	const submit = async (values: UpdateTodoRequest) => {
@@ -139,6 +149,8 @@ export default function UpdateTodo(props: { todo: Todo }) {
 							label="詳細"
 							placeholder="詳細"
 						/>
+
+						<FormCheckBox control={control} id="labelIds" label="ラベル" />
 					</YStack>
 				</FormArea>
 			)}

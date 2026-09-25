@@ -5,21 +5,30 @@ import type { Todo } from "./type";
 export const useTodoStore = create<{
 	todos: Todo[];
 	getAll: () => Promise<void>;
-	create: (values: { title: string; description?: string }) => void;
+	create: (values: {
+		title: string;
+		description?: string;
+		labelIds?: number[];
+	}) => void;
 	update: (
 		id: number,
 		values: {
 			title: string;
 			description: string;
 			completed: boolean;
+			labelIds?: number[];
 		},
 	) => void;
 	delete: (id: number) => void;
 }>((set) => ({
 	todos: [],
 
-	create: async ({ title, description }) => {
-		const response = await api.post("/todos", { title, description });
+	create: async ({ title, description, labelIds }) => {
+		const response = await api.post("/todos", {
+			title,
+			description,
+			labelIds,
+		});
 		const createdTodo = response.data;
 		set((state) => ({
 			todos: [
@@ -29,6 +38,7 @@ export const useTodoStore = create<{
 					title: createdTodo.title,
 					description: createdTodo.description,
 					completed: createdTodo.completed,
+					labels: createdTodo.labels,
 				},
 			],
 		}));
@@ -39,11 +49,12 @@ export const useTodoStore = create<{
 		set({ todos: response.data });
 	},
 
-	update: async (id, { title, description, completed }) => {
+	update: async (id, { title, description, completed, labelIds }) => {
 		const response = await api.patch(`todos/${id}`, {
 			title,
 			description,
 			completed,
+			labelIds,
 		});
 		const updatedTodo = response.data;
 		set((state) => ({
@@ -54,6 +65,7 @@ export const useTodoStore = create<{
 							title: updatedTodo.title,
 							description: updatedTodo.description,
 							completed: updatedTodo.completed,
+							labels: updatedTodo.labels,
 						}
 					: todo,
 			),
