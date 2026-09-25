@@ -1,5 +1,7 @@
 package com.app.domain.todo.dto;
 
+import java.util.List;
+
 import lombok.Data;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -8,8 +10,9 @@ import jakarta.validation.constraints.NotNull;
 public class UpdateTodoRequest {
   @NotBlank
   private String title;
-  @NotBlank
+  @NotNull
   private String description;
   @NotNull
   private Boolean completed;
+  private List<Long> labelIds;
 }

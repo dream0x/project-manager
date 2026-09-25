@@ -12,7 +12,7 @@ export default function FormField<T extends FieldValues>(props: {
 	control: Control<T>;
 	id: Path<T>;
 	label: string;
-	placeholder: string;
+	placeholder?: string;
 	children: (props: {
 		field: ControllerRenderProps<T, Path<T>>;
 	}) => React.JSX.Element;
