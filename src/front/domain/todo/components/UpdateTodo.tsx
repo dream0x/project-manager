@@ -134,7 +134,7 @@ export default function UpdateTodo(props: { todo: Todo }) {
 					formState={formState}
 					submitLabel="更新"
 				>
-					<YStack>
+					<YStack gap="$4">
 						<DeleteButton onSubmit={deleteSubmit} />
 						<FormInput
 							control={control}

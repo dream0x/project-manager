@@ -2,16 +2,16 @@ import { TabList, TabSlot, Tabs, TabTrigger } from "expo-router/ui";
 import CustomTabList from "@/domain/common/components/tab/CustomTabList";
 import TabItem from "@/domain/common/components/tab/TabItem";
 
-const tabs: { name: string; href: string; label: string }[] = [
+const tabItems: { name: string; href: string; label: string }[] = [
 	{
 		name: "todos",
 		href: "/todos",
 		label: "Todo",
 	},
 	{
-		name: "filters",
-		href: "/filters",
-		label: "フィルター",
+		name: "projects",
+		href: "/projects",
+		label: "プロジェクト",
 	},
 	{
 		name: "labels",
@@ -28,9 +28,9 @@ export default function TabLayout() {
 			{/* タブバー */}
 			<TabList asChild>
 				<CustomTabList>
-					{tabs.map((tab) => (
-						<TabTrigger key={tab.name} name={tab.name} href={tab.href} asChild>
-							<TabItem label={tab.label} />
+					{tabItems.map((tabItem) => (
+						<TabTrigger key={tabItem.name} name={tabItem.name} href={tabItem.href} asChild>
+							<TabItem label={tabItem.label} />
 						</TabTrigger>
 					))}
 				</CustomTabList>
