@@ -1,9 +1,5 @@
-import { Text, YStack } from "tamagui";
+import ProjectList from "@/domain/project/components/ProjectList";
 
 export default function Filter() {
-	return (
-		<YStack flex={1} alignItems="center" justifyContent="center">
-			<Text>フィルター画面（未実装）</Text>
-		</YStack>
-	);
+	return <ProjectList />
 }
